@@ -1,0 +1,138 @@
+@import url(fonts.css);
+@import url(normalize.css);
+html {
+  font-size: 16px;
+  box-sizing: border-box;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  font-family: "red_hat_displayregular";
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #406EAC;
+  background-color: #A397B4;
+  text-decoration: none;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+a:hover, a:focus {
+  color: #D0BBD0;
+}
+
+a:active {
+  color: #FAF8F8;
+}
+
+a:visited {
+  background-color: #D0BBD0;
+  color: #1D4B9E;
+  text-decoration: none;
+}
+
+button {
+  background-color: #87CEFA;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+button:hover, button:focus {
+  background-color: #1D4B9E;
+}
+
+button:active {
+  border: 2px inset;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+header {
+  box-shadow: var(--shadow);
+}
+
+main {
+  flex: 1;
+}
+
+h1 {
+  margin: 0;
+  padding: 20px;
+  font-size: 1.75em;
+  text-align: center;
+  font-family: "rammetto_oneregular";
+  letter-spacing: 0.6px;
+  text-shadow: 3px 3px 5px lightgray;
+}
+
+#wrapper {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 900px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffebeb;
+}
+
+#gameWindow div {
+  display: flex;
+  justify-content: center;
+}
+#gameWindow button {
+  width: 100px;
+  height: 35px;
+  margin: 10px 5px;
+}
+#gameWindow #gameWord {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: 50px;
+}
+#gameWindow #hint, #gameWindow #gameWord {
+  margin: 10px 0;
+}
+#gameWindow #stickyPic {
+  min-height: 250px;
+  min-width: 200px;
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 15px;
+}
+
+#keyboard button {
+  width: 8%;
+  height: 40px;
+  margin: 2px;
+}
+
+.keyrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.letterbox {
+  border: 2px solid black;
+  margin: 0 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+}

@@ -1,0 +1,32 @@
+/* a legible, slightly stiff font */
+
+@font-face {
+    font-family: 'red_hat_displayregular';
+    src: url('../media/redhatdisplay-variablefont_wght-webfont.woff2') format('woff2'),
+         url('../media/redhatdisplay-variablefont_wght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* similar, but more compact: */
+
+@font-face {
+    font-family: 'robotoregular';
+    src: url('../media/roboto-variablefont_wdthwght-webfont.woff2') format('woff2'),
+         url('../media/roboto-variablefont_wdthwght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* a louder, more fun and bold title font */
+
+@font-face {
+    font-family: 'rammetto_oneregular';
+    src: url('../media/rammettoone-regular-webfont.woff2') format('woff2'),
+         url('../media/rammettoone-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

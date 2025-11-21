@@ -1,0 +1,161 @@
+@charset "utf-8";
+
+@import url(fonts.css);
+
+@import url(normalize.css);
+
+    $main-text-font: 'red_hat_displayregular';
+    $heading-font: 'rammetto_oneregular';
+
+    $dark-blue: #1D4B9E;
+    $blue: #406EAC;
+    $light-blue: #87CEFA;
+    $amethyst: #A397B4;
+    $paperwhite: #ffebeb;
+    $bg-highlight: #FAF8F8;
+    $highlight: #D0BBD0;
+
+    $green: #008000;
+    $lightgreen: #90ee90;
+    $darkred: #8b0000;
+    $lightred: #ff968a;
+
+    $shadow: 3px 5px 3px rgba(72, 72, 72, 0.2);
+
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+    line-height: 1.5;
+    letter-spacing: .5px;
+    font-family: $main-text-font;
+}
+
+*, *:before, *:after 
+    {box-sizing: inherit;}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a{
+	color: $blue;
+    background-color: $amethyst;
+    text-decoration: none;
+    padding: 3px;
+    border-radius: 5px;
+}
+a:hover, a:focus
+    {color: $highlight;}
+a:active
+    {color: $bg-highlight;}
+a:visited{
+    background-color: $highlight;
+    color: $dark-blue;
+    text-decoration: none;
+}
+
+button {
+    background-color: $light-blue;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+button:hover, button:focus {
+    background-color: $dark-blue;
+}
+button:active
+    {border: 2px inset;}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+header  
+    {box-shadow: var(--shadow);}
+
+main    
+    {flex: 1;}
+
+h1 {
+    margin: 0;
+    padding: 20px;
+    font-size: 1.75em;
+    text-align: center;
+    font-family: $heading-font;
+    letter-spacing: .6px;
+    text-shadow: 3px 3px 5px lightgray;
+}
+
+#wrapper {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 900px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $paperwhite;
+}
+
+#gameWindow {
+    div {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        width: 100px;
+        height: 35px;
+        margin: 10px 5px;
+    }
+
+    #gameWord {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        min-height: 50px;
+    }
+
+    #hint, #gameWord {
+        margin: 10px 0;
+    }
+
+    #hint {
+        
+    }
+
+    #stickyPic {
+        min-height: 250px;
+        min-width: 200px;
+        border: 2px solid black;
+        border-radius: 8px;
+        margin: 15px;
+    }
+}
+
+#keyboard {
+    button {
+        width: 8%;
+        height: 40px;
+        margin: 2px;
+    }
+}
+
+.keyrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.letterbox {
+    border: 2px solid black;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.hide {
+    display: none;
+}
