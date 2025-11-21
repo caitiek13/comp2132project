@@ -105,6 +105,9 @@ h1 {
         justify-content: center;
     }
 
+    #hint 
+    {flex-direction: column;}
+
     button {
         width: 100px;
         height: 35px;
@@ -122,8 +125,10 @@ h1 {
         margin: 10px 0;
     }
 
-    #hint {
-        
+    #hintBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     #stickyPic {
@@ -154,6 +159,15 @@ h1 {
     margin: 0 5px;
     display: flex;
     justify-content: center;
+}
+.spacebox {
+    width: 15px;
+    margin: 0 5px;
+}
+
+.hintBox {
+    border: 2px solid $darkred;
+    background-color: $lightred;
 }
 
 .hide {

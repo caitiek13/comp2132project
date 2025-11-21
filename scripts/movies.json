@@ -1,13 +1,11 @@
 [
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "pulp fiction",
+        "hints": ["This early 90's film's influence on independent cinema was significant, despite some finding the violence and certain subplots unsettling", "From the creators of 'True Romance' and 'Reservoir Dogs'", "You won't know the facts until you've seen the fiction"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "fight club",
+        "hints": ["The film features a nameless first-person narrator who attends support groups", "Co-starring Helena Bonham Carter", "How much can you know about yourself if you've never been in a fight?"]
     },
     {
         "name": "",

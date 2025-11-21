@@ -6,19 +6,19 @@ const spinner = new Image();
 spinner.src = '/media/spinner.gif';
 spinner.alt = 'Loading';
 
+const jsonUrl                   = "/scripts/movies.json";
+
 const resetBtn                  = document.getElementById('newGame');
 const sticky                    = document.getElementById('sticky');
 const word                      = document.getElementById('gameWord');
-const keys                      = document.querySelectorAll('button');
+const keys                      = document.querySelectorAll('#keyboard button');
 const hintBtn                   = document.getElementById('showHint');
-const genreBtn                  = document.getElementById('showGenre');
 const hint                      = document.getElementById('hint');
-
-const jsonUrl                   = "/scripts/game-characters.json";
 
 let fetchData;
 let arrayNames;
 let arrayHints;
+let imgSrc                      = "/media/images/";
 
 let hintCounter                 = 0;
 let genreHintGiven              = false;
@@ -28,15 +28,6 @@ let gameWord                    = '';
 let gameWordHints               = [];
 let gameWordLetters             = [];
 
-
-
-// each button including newGame returns its id
-// which is it's letter, or newGame for the reset button
-keys.forEach(function(button){
-    button.addEventListener("click", function(){
-        console.log(button.getAttribute('id'));
-    })
-})
 
 resetBtn.addEventListener("click", function(){
     hintCounter                 = 0;
@@ -76,20 +67,54 @@ resetBtn.addEventListener("click", function(){
     });
 
     hintBtn.classList.remove('hide');
-    genreBtn.classList.remove('hide');
     resetBtn.innerText = "New Game";
 
-    
+    let html;
+
+    gameWordLetters.forEach(function(letter){
+        if(letter != " "){
+            html += `<div class="letterbox">${letter}</div>`;
+        }else{
+            html += '<div class="spacebox"><div>';
+        }
+    })
+
+    word.innerHTML = html;
 })
 
 hintBtn.addEventListener("click", function(){
-    if(hintCounter < 3){
+    hint.classList.remove('hide');
+    hint.classList.add('hintBox');
+    
+    if(hintCounter <= 1){
         hintCounter++;
-        hint.innerHTML += `${gameWordHints[(hintCounter - 1)]}`;
-    }else if(hintCounter == 2 && genreHintGiven == false){
+        hint.innerHTML += `<p>${gameWordHints[(hintCounter - 1)]}</p>`;
+    }else if(hintCounter == 2){
         hintCounter++;
-        
+        hintBtn.setAttribute('disabled', true);
+        hint.innerHTML += `<p>${gameWordHints[(hintCounter - 1)]}</p>`;
     }
+})
+
+keys.forEach(function(button){
+    button.addEventListener("click", function(){
+        button.setAttribute('disabled', true);
+
+        if(gameWordLetters.includes(button.id)){
+            console.log("correct");
+        }else{
+            console.log("wrong");
+            wrongGuesses++;
+            sticky.src = `${imgSrc}stick${wrongGuesses + 1}.jpg`;
+        };
+
+        if(wrongGuesses == 5){
+            keys.forEach(function(btn){
+                btn.setAttribute('disabled', true);
+            })
+            hintBtn.setAttribute('disabled', true);
+        }
+    })
 })
 
 function arrayShuffle(anArray){
@@ -105,6 +130,10 @@ function arrayShuffle(anArray){
     }
 
     return anArray;
+}
+
+function updateSticky(){
+
 }
 // resetBtn.addEventListener('click', function(){
 
