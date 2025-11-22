@@ -22,7 +22,6 @@ let imgSrc                      = "/media/images/";
 
 let hintCounter                 = 0;
 let wrongGuesses                = 0;
-let spacesLeft                  = 0;
 let gameObject                  = '';
 let gameWord                    = '';
 let gameWordHints               = [];
@@ -33,7 +32,6 @@ let gameWordNewLetters          = [];
 resetBtn.addEventListener("click", function(){
     hintCounter                 = 0;
     wrongGuesses                = 0;
-    spacesLeft                  = 0;
     gameObject                  = '';
     gameWord                    = '';
     gameWordHints               = [];
@@ -139,7 +137,6 @@ function startGame(chosenWord){
             html += `<div class="hiddenLetterBox"><div class="hiddenLetter">${letter}</div></div>`;
         }else{
             html += `<div class="spacebox">${letter}</div>`;
-            spacesLeft++;
         }
     })
 
@@ -173,6 +170,7 @@ function checkLetters(guess){
 
         }else if(guess.id != letter){
             gameWordNewLetters.push(letter);
+            lettersLeft++;
         }
     })
 
@@ -193,8 +191,6 @@ function checkLetters(guess){
     })
 
     word.innerHTML = html;
-
-    lettersLeft = (lettersLeft - spacesLeft);
 
     console.log("letters left to guess: " + lettersLeft);
 
