@@ -21,23 +21,26 @@ let arrayHints;
 let imgSrc                      = "/media/images/";
 
 let hintCounter                 = 0;
-let genreHintGiven              = false;
 let wrongGuesses                = 0;
+let spacesLeft                  = 0;
 let gameObject                  = '';
 let gameWord                    = '';
 let gameWordHints               = [];
 let gameWordLetters             = [];
+let gameWordNewLetters          = [];
 
 
 resetBtn.addEventListener("click", function(){
     hintCounter                 = 0;
-    genreHintGiven              = false;
     wrongGuesses                = 0;
+    spacesLeft                  = 0;
     gameObject                  = '';
     gameWord                    = '';
     gameWordHints               = [];
     gameWordLetters             = [];
     hint.innerHTML              = '';
+    hint.classList.remove('hintBox');
+    hint.classList.add('hide');
 
     fetch(jsonUrl).then(function(response){
         word.appendChild(spinner);
@@ -45,8 +48,9 @@ resetBtn.addEventListener("click", function(){
         if(response.ok){
             return response.json();
         }else{
-            console.log("nope");
+            console.log(response.error);
         }
+
     }).then(function(data){
         word.innerHTML = '';
         fetchData = data;
@@ -56,30 +60,23 @@ resetBtn.addEventListener("click", function(){
         gameObject = arrayNames[0];
         gameWord = gameObject.name;
         gameWordHints = gameObject.hints;
-        console.log(gameWord, gameWordHints);
+
         for(let i = 0; i < gameWord.length; i++){
             gameWordLetters.push(gameWord.charAt(i));
-            
         }
-        console.log(gameWordLetters);
+
+        if(gameWordLetters.length > 0){
+            word.innerHTML = startGame(gameWordLetters);
+            
+            sticky.src = `${imgSrc}stick${wrongGuesses}.jpg`;
+            hintBtn.classList.remove('hide');
+            resetBtn.innerText = "New Game";
+        }
+        
     }).catch(function(error){
         console.log(error);
     });
-
-    hintBtn.classList.remove('hide');
-    resetBtn.innerText = "New Game";
-
-    let html;
-
-    gameWordLetters.forEach(function(letter){
-        if(letter != " "){
-            html += `<div class="letterbox">${letter}</div>`;
-        }else{
-            html += '<div class="spacebox"><div>';
-        }
-    })
-
-    word.innerHTML = html;
+    
 })
 
 hintBtn.addEventListener("click", function(){
@@ -105,8 +102,10 @@ keys.forEach(function(button){
         }else{
             console.log("wrong");
             wrongGuesses++;
-            sticky.src = `${imgSrc}stick${wrongGuesses + 1}.jpg`;
-        };
+            sticky.src = `${imgSrc}stick${wrongGuesses}.jpg`;
+        }
+
+        checkLetters(button);
 
         if(wrongGuesses == 5){
             keys.forEach(function(btn){
@@ -132,53 +131,78 @@ function arrayShuffle(anArray){
     return anArray;
 }
 
-function updateSticky(){
+function startGame(chosenWord){
+    let html = '';
 
+    chosenWord.forEach(function(letter){
+        if(letter != " "){
+            html += `<div class="hiddenLetterBox"><div class="hiddenLetter">${letter}</div></div>`;
+        }else{
+            html += `<div class="spacebox">${letter}</div>`;
+            spacesLeft++;
+        }
+    })
+
+    return html;
 }
-// resetBtn.addEventListener('click', function(){
 
-//     // Remove any existing HTML on the output div
-//     gameWord.innerHTML = '';
-//     // Insert a spinner while the data loads
-//     gameWord.appendChild(spinner);
+// build a function that checks the gameWordLetters whenever
+// a key is pressed, and removes the hiddenLetter class
+// if the button.id matches the innerHTML of each letterbox
+
+function checkLetters(guess){
+
+    let lettersLeft = 0;
+
+    // take the answers we've gotten so far
+    // and 'update' the array if the guess was correct
+    // (copy to a new array)
+
+    gameWordLetters.forEach(function(letter){
+        if(letter == letter.toUpperCase()){
+            // letter already correctly guessed
+            gameWordNewLetters.push(letter);
+
+        }else if(letter == " "){
+            // empty space
+            gameWordNewLetters.push(letter);
+
+        }else if(guess.id == letter.toLowerCase()){
+            // player made a correct guess; change letter case
+            gameWordNewLetters.push(letter.toUpperCase());
+
+        }else if(guess.id != letter){
+            gameWordNewLetters.push(letter);
+        }
+    })
+
+    // update the word letterboxes each check
+
+    let html = '';
+
+    gameWordNewLetters.forEach(function(letter){
+        if(letter != " "){
+            if(letter == letter.toUpperCase()){
+                html += `<div>${letter}</div>`;
+            }else if(letter == letter.toLowerCase()){
+                html += `<div class="hiddenLetterBox"><div class="hiddenLetter">${letter}</div></div>`;
+            }
+        }else{
+            html += `<div class="spacebox">${letter}</div>`;
+        }
+    })
+
+    word.innerHTML = html;
+
+    lettersLeft = (lettersLeft - spacesLeft);
+
+    console.log("letters left to guess: " + lettersLeft);
+
+    if(lettersLeft == 0){
+        console.log("you win!");
+    }
+
+    gameWordLetters = gameWordNewLetters;
+    gameWordNewLetters = [];
     
-//     /*
-//     this fetch request also includes an api key to give
-//     us permission to use the API
-//     */
-//     fetch('https://dog-breeds9.p.rapidapi.com/tags/all-breeds', {
-//         "method": "GET",
-//         "headers": {
-//             "x-rapidapi-key": "25bca918c1msh235d5efa1e41b22p10dfc7jsn46cd01eb47d4",
-// 		    "x-rapidapi-host": "dog-breeds9.p.rapidapi.com"
-//         }
-//     })
-//         .then(function(response){
-            
-//             if(response.ok){
-//                 return response.json();
-//             }else{
-//                 console.log("Network error: fetch failed");
-//             }
-            
-//         })
-//         .then(function(data){
-//             // Remove the spinner
-//             gameWord.innerHTML = '';
-//             gameWord.removeChild;
-
-//             console.log(data.text);
-           
-
-//         })
-//         .catch(function(error){
-//             gameWord.innerHTML = `<p>${error}. Please try again.</p>`;
-//         });
-
-// });
-
-// need to fetch a new 'item' on each reset, store new info into a json object
-// so page should open with a fresh fetch already and reset just reloads page
-// this needs to be figured out
-
-
+}

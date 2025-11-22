@@ -6,6 +6,7 @@
 
     $main-text-font: 'red_hat_displayregular';
     $heading-font: 'rammetto_oneregular';
+    $letterbox-font: 'martian_monoSexpandedRg';
 
     $dark-blue: #1D4B9E;
     $blue: #406EAC;
@@ -61,9 +62,8 @@ button {
     border: 1px solid black;
     border-radius: 3px;
 }
-button:hover, button:focus {
-    background-color: $dark-blue;
-}
+button:hover, button:focus 
+    {background-color: $dark-blue;}
 button:active
     {border: 2px inset;}
 
@@ -72,6 +72,9 @@ body {
     padding: 0;
     background-color: black;
 }
+
+p 
+    {margin: 5px;}
 
 header  
     {box-shadow: var(--shadow);}
@@ -100,6 +103,10 @@ h1 {
 }
 
 #gameWindow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     div {
         display: flex;
         justify-content: center;
@@ -115,10 +122,19 @@ h1 {
     }
 
     #gameWord {
-        display: flex;
-        flex-direction: row;
         justify-content: center;
         min-height: 50px;
+        padding: 0 15px;
+
+        div {
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+            font-size: 24px;
+            font-family: $letterbox-font;
+            width: 4%;
+            margin: 0 3px;
+        }
     }
 
     #hint, #gameWord {
@@ -126,17 +142,15 @@ h1 {
     }
 
     #hintBox {
-        display: flex;
         flex-direction: column;
         justify-content: center;
+        margin: 0 15px;
     }
 
     #stickyPic {
-        min-height: 250px;
-        min-width: 200px;
         border: 2px solid black;
         border-radius: 8px;
-        margin: 15px;
+        margin: 15px auto;
     }
 }
 
@@ -153,15 +167,11 @@ h1 {
     flex-direction: row;
     justify-content: center;
 }
-
-.letterbox {
-    border: 2px solid black;
-    margin: 0 5px;
-    display: flex;
-    justify-content: center;
-}
+.hiddenLetterBox 
+    {border-bottom: 2px solid black;}
+.hiddenLetter 
+    {visibility: hidden;}
 .spacebox {
-    width: 15px;
     margin: 0 5px;
 }
 

@@ -60,6 +60,10 @@ body {
   background-color: black;
 }
 
+p {
+  margin: 5px;
+}
+
 header {
   box-shadow: var(--shadow);
 }
@@ -88,6 +92,11 @@ h1 {
   background-color: #ffebeb;
 }
 
+#gameWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 #gameWindow div {
   display: flex;
   justify-content: center;
@@ -101,25 +110,31 @@ h1 {
   margin: 10px 5px;
 }
 #gameWindow #gameWord {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   min-height: 50px;
+  padding: 0 15px;
+}
+#gameWindow #gameWord div {
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 24px;
+  font-family: "martian_monoSexpandedRg";
+  width: 4%;
+  margin: 0 3px;
 }
 #gameWindow #hint, #gameWindow #gameWord {
   margin: 10px 0;
 }
 #gameWindow #hintBox {
-  display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0 15px;
 }
 #gameWindow #stickyPic {
-  min-height: 250px;
-  min-width: 200px;
   border: 2px solid black;
   border-radius: 8px;
-  margin: 15px;
+  margin: 15px auto;
 }
 
 #keyboard button {
@@ -134,15 +149,15 @@ h1 {
   justify-content: center;
 }
 
-.letterbox {
-  border: 2px solid black;
-  margin: 0 5px;
-  display: flex;
-  justify-content: center;
+.hiddenLetterBox {
+  border-bottom: 2px solid black;
+}
+
+.hiddenLetter {
+  visibility: hidden;
 }
 
 .spacebox {
-  width: 15px;
   margin: 0 5px;
 }
 
