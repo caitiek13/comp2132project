@@ -9,9 +9,7 @@
     $letterbox-font: 'martian_monoSexpandedRg';
 
     $dark-blue: #1D4B9E;
-    $blue: #406EAC;
     $light-blue: #87CEFA;
-    $amethyst: #A397B4;
     $paperwhite: #ffebeb;
     $bg-highlight: #FAF8F8;
     $highlight: #D0BBD0;
@@ -21,7 +19,7 @@
     $darkred: #8b0000;
     $lightred: #ff968a;
 
-    $shadow: 3px 5px 3px rgba(72, 72, 72, 0.2);
+    $shadow: 3px 5px 3px rgba(72, 72, 72, 0.5);
 
 html {
     font-size: 16px;
@@ -39,22 +37,10 @@ img {
     height: auto;
 }
 
-a{
-	color: $blue;
-    background-color: $amethyst;
-    text-decoration: none;
-    padding: 3px;
-    border-radius: 5px;
-}
-a:hover, a:focus
-    {color: $highlight;}
-a:active
-    {color: $bg-highlight;}
-a:visited{
-    background-color: $highlight;
-    color: $dark-blue;
-    text-decoration: none;
-}
+a{}
+a:hover, a:focus{}
+a:active{}
+a:visited{}
 
 button {
     background-color: $light-blue;
@@ -76,30 +62,44 @@ body {
 p 
     {margin: 5px;}
 
-header  
-    {box-shadow: var(--shadow);}
+header {
+    background: linear-gradient(to right,
+        red, 
+        orange 20%, 
+        yellow 40%, 
+        green 60%, 
+        blue 80%, 
+        indigo);
+    box-shadow: $shadow;
+    z-index: 1;
+}
 
 main    
     {flex: 1;}
 
 h1 {
-    margin: 0;
     padding: 20px;
     font-size: 1.75em;
-    text-align: center;
-    font-family: $heading-font;
-    letter-spacing: .6px;
-    text-shadow: 3px 3px 5px lightgray;
 }
+h1, h2 {
+    margin: 0;
+    font-family: $heading-font;
+    text-shadow: 3px 3px 5px lightgray;
+    text-align: center;
+    letter-spacing: .6px;
+    background-color: rgba(255, 255, 255, 0.499);
+    z-index: 2;
+}
+h2  {padding-bottom: 15px;}
 
 #wrapper {
     margin: 0 auto;
-    padding: 0;
+    padding: 0 0 20px;
     max-width: 900px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: $paperwhite;
+    background-color: white;
 }
 
 #gameWindow {
@@ -123,7 +123,6 @@ h1 {
 
     #gameWord {
         justify-content: center;
-        min-height: 50px;
         padding: 0 15px;
 
         div {
@@ -147,10 +146,8 @@ h1 {
         margin: 0 15px;
     }
 
-    #stickyPic {
-        border: 2px solid black;
-        border-radius: 8px;
-        margin: 15px auto;
+    #sticky {
+        margin: 15px;
     }
 }
 
@@ -162,6 +159,9 @@ h1 {
     }
 }
 
+.headShrink {
+    font-size: 1rem;
+}
 .keyrow {
     display: flex;
     flex-direction: row;
@@ -182,4 +182,20 @@ h1 {
 
 .hide {
     display: none;
+}
+
+.bad {
+    background-color: $lightred;
+    color: $darkred;
+}
+.good {
+    background-color: $lightgreen;
+    color: $green;
+}
+.bad, .good {
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
 }

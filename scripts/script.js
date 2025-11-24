@@ -1,7 +1,3 @@
-// word should be populated with a letterbox for each letter in the word it loads
-// sticky will update the image each time a letter was guessed wrong
-// pretty sure i will need to run regexp for whatever word is randomly selected
-// not sure how exactly though
 const spinner = new Image();
 spinner.src = '/media/spinner.gif';
 spinner.alt = 'Loading';
@@ -13,7 +9,8 @@ const sticky                    = document.getElementById('sticky');
 const word                      = document.getElementById('gameWord');
 const keys                      = document.querySelectorAll('#keyboard button');
 const hintBtn                   = document.getElementById('showHint');
-const hint                      = document.getElementById('hint');
+const hintBox                   = document.getElementById('hint');
+const messageBox                = document.getElementById('message');
 
 let fetchData;
 let arrayNames;
@@ -27,6 +24,7 @@ let gameWord                    = '';
 let gameWordHints               = [];
 let gameWordLetters             = [];
 let gameWordNewLetters          = [];
+let message                     = '';
 
 
 resetBtn.addEventListener("click", function(){
@@ -36,9 +34,17 @@ resetBtn.addEventListener("click", function(){
     gameWord                    = '';
     gameWordHints               = [];
     gameWordLetters             = [];
-    hint.innerHTML              = '';
-    hint.classList.remove('hintBox');
-    hint.classList.add('hide');
+    hintBox.innerHTML           = '';
+    message                     = '';
+    messageBox.innerHTML        = message;
+    hintBox.classList.remove('hintBox');
+    hintBox.classList.add('hide');
+    
+    // reset all buttons
+    keys.forEach(function(button){
+        button.removeAttribute('disabled');
+    })
+    hintBtn.removeAttribute('disabled');
 
     fetch(jsonUrl).then(function(response){
         word.appendChild(spinner);
@@ -59,18 +65,20 @@ resetBtn.addEventListener("click", function(){
         gameWord = gameObject.name;
         gameWordHints = gameObject.hints;
 
+        // chop the name of the chosen film into little bits
+        // which we will use to build the letterboxes,
+        // and to run verification checks with each keypress
+        
         for(let i = 0; i < gameWord.length; i++){
             gameWordLetters.push(gameWord.charAt(i));
         }
 
-        if(gameWordLetters.length > 0){
-            word.innerHTML = startGame(gameWordLetters);
-            
-            sticky.src = `${imgSrc}stick${wrongGuesses}.jpg`;
-            hintBtn.classList.remove('hide');
-            resetBtn.innerText = "New Game";
-        }
+        word.innerHTML = startGame(gameWordLetters);
         
+        sticky.src = `${imgSrc}stick${wrongGuesses}.jpg`;
+        hintBtn.classList.remove('hide');
+        resetBtn.innerText = "New Game";
+
     }).catch(function(error){
         console.log(error);
     });
@@ -78,16 +86,17 @@ resetBtn.addEventListener("click", function(){
 })
 
 hintBtn.addEventListener("click", function(){
-    hint.classList.remove('hide');
-    hint.classList.add('hintBox');
+    hintBox.classList.remove('hide');
+    hintBox.classList.add('hintBox');
     
+    // only 3 hints per film
     if(hintCounter <= 1){
         hintCounter++;
-        hint.innerHTML += `<p>${gameWordHints[(hintCounter - 1)]}</p>`;
+        hintBox.innerHTML += `<p>${gameWordHints[(hintCounter - 1)]}</p>`;
     }else if(hintCounter == 2){
         hintCounter++;
         hintBtn.setAttribute('disabled', true);
-        hint.innerHTML += `<p>${gameWordHints[(hintCounter - 1)]}</p>`;
+        hintBox.innerHTML += `<p>${gameWordHints[(hintCounter - 1)]}</p>`;
     }
 })
 
@@ -95,24 +104,30 @@ keys.forEach(function(button){
     button.addEventListener("click", function(){
         button.setAttribute('disabled', true);
 
-        if(gameWordLetters.includes(button.id)){
-            console.log("correct");
-        }else{
-            console.log("wrong");
+        if(!gameWordLetters.includes(button.id)){
             wrongGuesses++;
             sticky.src = `${imgSrc}stick${wrongGuesses}.jpg`;
         }
 
+        // run the verifying function
         checkLetters(button);
 
         if(wrongGuesses == 5){
+            // player lost, game over
+
             keys.forEach(function(btn){
                 btn.setAttribute('disabled', true);
             })
             hintBtn.setAttribute('disabled', true);
+
+            message ='<p class="bad">Game over! Give Sticky another shot and try again!</p>';
+            messageBox.innerHTML = message;
         }
     })
 })
+
+// shuffle the json array which we put our JSON into
+// so a random film is chosen each new game
 
 function arrayShuffle(anArray){
     let j, x, i;
@@ -142,10 +157,6 @@ function startGame(chosenWord){
 
     return html;
 }
-
-// build a function that checks the gameWordLetters whenever
-// a key is pressed, and removes the hiddenLetter class
-// if the button.id matches the innerHTML of each letterbox
 
 function checkLetters(guess){
 
@@ -192,11 +203,15 @@ function checkLetters(guess){
 
     word.innerHTML = html;
 
-    console.log("letters left to guess: " + lettersLeft);
-
+    // if all letters are capitalized (correct) player wins
+    
     if(lettersLeft == 0){
-        console.log("you win!");
+        message = '<p class="good">You win! Sticky is free to go for now... Play again?</p>'
+        messageBox.innerHTML = message;
     }
+
+    // make the copied array the new original array
+    // so we can continue
 
     gameWordLetters = gameWordNewLetters;
     gameWordNewLetters = [];
