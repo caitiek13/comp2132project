@@ -4,22 +4,29 @@
 
 @import url(normalize.css);
 
+// variables
+
     $main-text-font: 'red_hat_displayregular';
     $heading-font: 'rammetto_oneregular';
     $letterbox-font: 'martian_monoSexpandedRg';
 
     $dark-blue: #1D4B9E;
+    $blue: #386dd1;
     $light-blue: #87CEFA;
-    $paperwhite: #ffebeb;
-    $bg-highlight: #FAF8F8;
-    $highlight: #D0BBD0;
-
+    $dark-pink: #b5454e;
+    $peach: #ff968a;
     $green: #008000;
     $lightgreen: #90ee90;
     $darkred: #8b0000;
     $lightred: #ff968a;
 
-    $shadow: 3px 5px 3px rgba(72, 72, 72, 0.5);
+    $shadow: 3px 5px 3px rgba(0, 0, 0, 0.3);
+
+    @mixin button-style($offright, $offbottom, $rounded-corners, $border-thickness){
+        box-shadow: $offright $offbottom 3px rgba(0, 0, 0, 0.3);
+        border: $border-thickness solid black;
+        border-radius: $rounded-corners;
+    }
 
 html {
     font-size: 16px;
@@ -37,21 +44,17 @@ img {
     height: auto;
 }
 
-a{}
-a:hover, a:focus{}
-a:active{}
-a:visited{}
-
 button {
     background-color: $light-blue;
     font-weight: bold;
-    border: 1px solid black;
-    border-radius: 3px;
+    @include button-style(0, 0, 5px, 1px);
 }
 button:hover, button:focus 
-    {background-color: $dark-blue;}
-button:active
-    {border: 2px inset;}
+    {background-color: $blue;}
+button:active {
+    transform: scale(0.95);
+    background-color: $dark-blue;
+}
 
 body {
     margin: 0;
@@ -64,14 +67,11 @@ p
 
 header {
     background: linear-gradient(to right,
-        red, 
-        orange 20%, 
-        yellow 40%, 
-        green 60%, 
-        blue 80%, 
-        indigo);
+        $dark-pink, 
+        $peach 35%,
+        $peach 65%,
+        $dark-pink);
     box-shadow: $shadow;
-    z-index: 1;
 }
 
 main    
@@ -84,18 +84,16 @@ h1 {
 h1, h2 {
     margin: 0;
     font-family: $heading-font;
-    text-shadow: 3px 3px 5px lightgray;
+    text-shadow: $shadow;
     text-align: center;
     letter-spacing: .6px;
-    background-color: rgba(255, 255, 255, 0.499);
-    z-index: 2;
 }
 h2  {padding-bottom: 15px;}
 
 #wrapper {
     margin: 0 auto;
     padding: 0 0 20px;
-    max-width: 900px;
+    max-width: 800px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -118,7 +116,8 @@ h2  {padding-bottom: 15px;}
     button {
         width: 100px;
         height: 35px;
-        margin: 10px 5px;
+        margin: 15px 5px;
+        @include button-style(3px, 5px, 8px, 2px);
     }
 
     #gameWord {
@@ -132,41 +131,50 @@ h2  {padding-bottom: 15px;}
             font-size: 24px;
             font-family: $letterbox-font;
             width: 4%;
+            max-width: 20px;
             margin: 0 3px;
         }
     }
 
-    #hint, #gameWord {
-        margin: 10px 0;
-    }
-
+    #hint, #gameWord 
+        {margin: 15px 0;}
+    #hint p 
+        {text-align: center;}
     #hintBox {
         flex-direction: column;
         justify-content: center;
         margin: 0 15px;
     }
 
-    #sticky {
-        margin: 15px;
+    #stickyFrame {
+        max-width: 370px;
+        margin: 15px auto;
     }
 }
 
 #keyboard {
+    margin-bottom: 40px;
+
     button {
         width: 8%;
-        height: 40px;
-        margin: 2px;
+        max-width: 50px;
+        height: 45px;
+        margin: .6%;
+        @include button-style(0, 0, 5px, 1px);
+    }
+
+    .keyrow {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
 }
 
 .headShrink {
     font-size: 1rem;
 }
-.keyrow {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
+
 .hiddenLetterBox 
     {border-bottom: 2px solid black;}
 .hiddenLetter 
@@ -184,18 +192,66 @@ h2  {padding-bottom: 15px;}
     display: none;
 }
 
-.bad {
+.lose {
     background-color: $lightred;
     color: $darkred;
 }
-.good {
+.win {
     background-color: $lightgreen;
     color: $green;
 }
-.bad, .good {
+.lose, .win {
     font-weight: bold;
     font-size: 1.25rem;
     text-align: center;
     padding: 10px;
     margin: 0;
+    width: 100%;
+}
+
+
+@media (min-width:450px){
+    #gameWindow {
+        button {
+            width: 125px;
+            height: 40px;
+            margin: 20px 10px;
+            font-size: 20px;
+        }
+    }
+
+    #keyboard {
+        button {
+            font-size: 20px;
+        }
+    }
+}
+
+@media (min-width:800px){
+    header 
+    {margin-bottom: 30px;}
+    h1
+    {font-size: 2em;}
+    h2
+    {font-size: 1.75em;}
+
+    #gameWindow {
+        button {
+            width: 150px;
+            height: 50px;
+            margin: 25px 10px;
+            font-size: 24px;
+        }
+    }
+
+    #keyboard {
+        button {
+            max-width: none;
+            width: 55px;
+            height: 50px;
+            margin: 5px;
+            @include button-style(0, 0, 8px, 1px);
+            font-size: 22px;
+        }
+    }
 }

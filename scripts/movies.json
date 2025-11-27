@@ -6,70 +6,56 @@
     {
         "name": "fight club",
         "hints": ["The film features a nameless first-person narrator who attends support groups", "Co-starring Helena Bonham Carter", "How much can you know about yourself if you've never been in a fight?"]
+    },{
+        "name": "inception",
+        "hints": ["This film became famous for it's stunning and surreal visuals, as well as hard to follow plot", "Joseph Gordon-Levitt performed all but one of his own stunts", "It's name remains a meme to this day for 'needlessly deep'"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "the matrix",
+        "hints": ["The opening action scene took six months of training and four days to shoot", "The film's tight budget meant that despite the characteristic high style, much of the fabrics used were cheap PVC and wool blend", "The main cast performed all of their own stunts and fight scenes after months of training"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "interstellar",
+        "hints": ["Lauded for it's scientific accuracy, a Physics Nobel Peace prize winner is it's Executive Producer", "Co-starring Sir Michael Caine", "Features interviews from 'The Dust Bowl'"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "the green mile",
+        "hints": ["Based on a Stephen King novel", "The film features a gentle giant character", "Filmed in Tennessee and California, it's based in a prison in Louisana"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "the dark knight",
+        "hints": ["Entry in an iconic series revived in a darker tone", "This 00's film grossed over $1B worldwide", "Film score composed by Hans Zimmer"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "schindlers list",
+        "hints": ["Filmed entirely in black and white", "90's film directed by Steven Spielberg", "Starring Liam Neeson"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "shawshank redemption",
+        "hints": ["Featuring narration by Morgan Freeman", "Though considered one of the best pieces of modern cinema, it suffered initially at the box office", "Based on a novel by Stephen King"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "forrest gump",
+        "hints": ["This 90's film is a winner of 13 Oscars", "Based on a similarly titled novel", "A whimsical, earnest, and heartfelt drama spanning multiple fictional decades"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "silence of the lambs",
+        "hints": ["Widely regarded as one of the best horror films of all time", "Ted Levine plays an iconic serial killer", "Promotional poster for the movie featured an insect with skull design inspired from art by Salvador Dali"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "saving private ryan",
+        "hints": ["Directed by Steven Spielberg", "Co-starring Matt Damon", "A film based on events from the Second World War"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "parasite",
+        "hints": ["The first Korean film to win Best Picture", "This commentary on wealth and class division is actually a genre-blender, featuring dark comedy, drama, and thriller elements", "Started as a play, adapted to screen by director Bong Joon-ho"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "life is beautiful",
+        "hints": ["Set against the backdrop of World War II", "Directed by Roberto Benigni, who also stars", "Despite the setting, the movie blends comedy and dramatic moments"]
     },
     {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
-    },
-    {
-        "name": "",
-        "genre": "",
-        "hints": ["", "", ""]
+        "name": "whiplash",
+        "hints": ["Explores the toxic nature of the mentor-student relationship with sharp and impactful dialogue", "Featuring a stellar performance from Miles Teller", "The soundtrack is filled with jazz compositions"]
     }
 ]

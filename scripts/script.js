@@ -1,8 +1,10 @@
+import { arrayShuffle } from "./arrayshuffle.js";
+
 const spinner = new Image();
-spinner.src = '/media/spinner.gif';
+spinner.src = 'media/spinner.gif';
 spinner.alt = 'Loading';
 
-const jsonUrl                   = "/scripts/movies.json";
+const jsonUrl                   = "scripts/movies.json";
 
 const resetBtn                  = document.getElementById('newGame');
 const sticky                    = document.getElementById('sticky');
@@ -14,9 +16,7 @@ const messageBox                = document.getElementById('message');
 
 let fetchData;
 let arrayNames;
-let arrayHints;
-let imgSrc                      = "/media/images/";
-
+let imgSrc                      = "media/images/";
 let hintCounter                 = 0;
 let wrongGuesses                = 0;
 let gameObject                  = '';
@@ -26,6 +26,11 @@ let gameWordLetters             = [];
 let gameWordNewLetters          = [];
 let message                     = '';
 
+// page should load with only the Start Game button visible
+
+keys.forEach(function(button){
+    button.setAttribute('disabled', true);
+})
 
 resetBtn.addEventListener("click", function(){
     hintCounter                 = 0;
@@ -39,6 +44,8 @@ resetBtn.addEventListener("click", function(){
     messageBox.innerHTML        = message;
     hintBox.classList.remove('hintBox');
     hintBox.classList.add('hide');
+
+    fadeIn();
     
     // reset all buttons
     keys.forEach(function(button){
@@ -68,7 +75,7 @@ resetBtn.addEventListener("click", function(){
         // chop the name of the chosen film into little bits
         // which we will use to build the letterboxes,
         // and to run verification checks with each keypress
-        
+
         for(let i = 0; i < gameWord.length; i++){
             gameWordLetters.push(gameWord.charAt(i));
         }
@@ -112,7 +119,7 @@ keys.forEach(function(button){
         // run the verifying function
         checkLetters(button);
 
-        if(wrongGuesses == 5){
+        if(wrongGuesses == 6){
             // player lost, game over
 
             keys.forEach(function(btn){
@@ -120,29 +127,14 @@ keys.forEach(function(button){
             })
             hintBtn.setAttribute('disabled', true);
 
-            message ='<p class="bad">Game over! Give Sticky another shot and try again!</p>';
+            hintBox.innerHTML = '';
+            hintBox.classList.remove('hintBox');
+            hintBox.classList.add('hide');
+            message ='<span class="lose">Game over! Give Sticky another shot and try again!</span>';
             messageBox.innerHTML = message;
         }
     })
 })
-
-// shuffle the json array which we put our JSON into
-// so a random film is chosen each new game
-
-function arrayShuffle(anArray){
-    let j, x, i;
-
-    for (i = anArray.length - 1; i > 0; i--) {
-
-        j = Math.floor(Math.random() * (i + 1));
-        x = anArray[i];
-
-        anArray[i] = anArray[j];
-        anArray[j] = x;
-    }
-
-    return anArray;
-}
 
 function startGame(chosenWord){
     let html = '';
@@ -206,8 +198,18 @@ function checkLetters(guess){
     // if all letters are capitalized (correct) player wins
     
     if(lettersLeft == 0){
-        message = '<p class="good">You win! Sticky is free to go for now... Play again?</p>'
+        message = '<span class="win">You win! Sticky is free to go for now... Play again?</span>'
         messageBox.innerHTML = message;
+
+        // disable all buttons except New Game
+        keys.forEach(function(btn){
+            btn.setAttribute('disabled', true);
+        })
+        hintBtn.setAttribute('disabled', true);
+        
+        hintBox.innerHTML = '';
+        hintBox.classList.remove('hintBox');
+        hintBox.classList.add('hide');
     }
 
     // make the copied array the new original array
@@ -215,5 +217,16 @@ function checkLetters(guess){
 
     gameWordLetters = gameWordNewLetters;
     gameWordNewLetters = [];
-    
+}
+
+function fadeIn(){
+    let opacity = 0;
+    let fadeAnimation = setInterval(function(){
+        if(opacity < 1){
+            opacity = opacity + 0.05;
+            sticky.style.opacity = opacity;
+        }else{
+            clearInterval(fadeAnimation);
+        }
+    }, 50)
 }

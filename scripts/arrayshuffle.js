@@ -1,16 +1,16 @@
 export {arrayShuffle};
 
 function arrayShuffle(anArray){
-        let j, x, i;
+    let j, x, i;
 
-        for (i = anArray.length - 1; i > 0; i--) {
+    for (i = anArray.length - 1; i > 0; i--) {
 
-            j = Math.floor(Math.random() * (i + 1));
-            x = anArray[i];
+        j = Math.floor(Math.random() * (i + 1));
+        x = anArray[i];
 
-            anArray[i] = anArray[j];
-            anArray[j] = x;
-        }
+        anArray[i] = anArray[j];
+        anArray[j] = x;
+    }
 
-        return anArray;
+    return anArray;
 }
